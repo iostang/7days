@@ -1,29 +1,77 @@
-# ABAuthModule
+#7天算法
 
-[![CI Status](https://img.shields.io/travis/icloud-art/ABAuthModule.svg?style=flat)](https://travis-ci.org/icloud-art/ABAuthModule)
-[![Version](https://img.shields.io/cocoapods/v/ABAuthModule.svg?style=flat)](https://cocoapods.org/pods/ABAuthModule)
-[![License](https://img.shields.io/cocoapods/l/ABAuthModule.svg?style=flat)](https://cocoapods.org/pods/ABAuthModule)
-[![Platform](https://img.shields.io/cocoapods/p/ABAuthModule.svg?style=flat)](https://cocoapods.org/pods/ABAuthModule)
 
-## Example
+[26. 删除排序数组中的重复项](https://leetcode.com/problems/remove-duplicates-from-sorted-array/submissions/)
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+```
+Swift
+class Solution {
+    static func removeDuplicates(_ nums: inout [Int]) -> Int {
+        let numsCount = nums.count
+        if numsCount == 0 || numsCount == 1 {
+            return numsCount
+        }
+        var p = 0
+        var q = 1
+        while q < numsCount {
+            if nums[p] != nums[q] {
+                nums[p + 1] = nums[q]
+                p+=1
+            }
+            q+=1
+        }
+        let resultCount = p + 1
+        if (resultCount < numsCount) {
+            let range = resultCount...numsCount-1
+            nums.removeSubrange(range)
+        }
+        return resultCount
+    }
+}
 
-## Installation
+//var nums = [1,1,2,2,3,3,4,5,6,7,7,8,9,9]
+var nums = [1,2,3]
+let count = Solution.removeDuplicates(&nums)
+print(count)
 
-ABAuthModule is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+Runtime: 68 ms, faster than 99.09% of Swift online submissions for Remove Duplicates from Sorted Array.
 
-```ruby
-pod 'ABAuthModule'
+Memory Usage: 21.3 MB, less than 25.00% of Swift online submissions for Remove Duplicates from Sorted Array.
+
 ```
 
-## Author
+```
+Java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        int p = 0,q = 1;
+        while(q < nums.length){
+            if(nums[p] != nums[q]){
+                nums[p + 1] = nums[q];
+                p++;
+            }
+            q++;
+        }
+        return p + 1;
+    }
+}
 
-icloud-art, yahuil@tujia.com
+Runtime: 1 ms, faster than 97.84% of Java online submissions for Remove Duplicates from Sorted Array.
 
-## License
+Memory Usage: 40.2 MB, less than 77.66% of Java online submissions for Remove Duplicates from Sorted Array.
 
-ABAuthModule is available under the MIT license. See the LICENSE file for more info.
+```
+**解题思路：**
+
+    利用双指针 一快一慢
+    由于数组已经是排好序的 所以只需要保证前后元素不相等即可
+
+**遇到的问题**
+
+Swift需要自己移除多余的元素 
+removeSubrange表示删除数组内某一范围的值
+
+Java貌似没这个问题
+
