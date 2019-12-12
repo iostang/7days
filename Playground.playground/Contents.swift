@@ -1,5 +1,7 @@
 class Solution {
     
+    /// 删除有序数组重复元素
+    /// - Parameter nums: [Int]
     func removeDuplicates(_ nums: inout [Int]) -> Int {
         let numsCount = nums.count
         if numsCount == 0 || numsCount == 1 {
@@ -22,20 +24,9 @@ class Solution {
         return resultCount
     }
     
-    func lengthOfLongestSubstring(_ s: String) -> Int {
-        var hashMap:[String:String] = [:]
-        var max = 0
-        for v in s {
-            if hashMap.keys.contains(where: {$0 == v.description}) {
-                max = 0
-                continue
-            }
-            hashMap[v.description] = v.description
-            max+=1
-        }
-        return max
-    }
-    
+    /// 旋转数组
+    /// - Parameter nums: [Int]
+    /// - Parameter k: k
     func rotate(_ nums: inout [Int], _ k: Int) {
         if (nums.count <= 1) {
             return
@@ -59,15 +50,11 @@ class Solution {
     }
 }
 
-
-//var nums = [1,1,2,2,3,3,4,5,6,7,7,8,9,9]
-var nums = [1,2,3]
 let solution = Solution()
+
+var nums = [1,1,2,2,3,3,4,5,6,7,7,8,9,9]
 let count = solution.removeDuplicates(&nums)
 print(count)
-let str = "abcabcaa"
-let strCount = solution.lengthOfLongestSubstring(str)
-print(strCount)
 
 var rotate = [1,2,3,4,5,6,7]
 let k = 3
