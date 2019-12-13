@@ -5,3 +5,5 @@
 
 #### 2.[旋转数组](./rotate-array.md)
 
+#### 3. [合并两个有序链表](./merge-two-sorted-lists.md)
+
