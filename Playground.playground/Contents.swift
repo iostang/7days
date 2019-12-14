@@ -70,8 +70,8 @@ class Solution {
 //            return l2
 //        }
         
-        let dummy:ListNode? = ListNode(-1)
-        var prev = dummy
+        let prevHead:ListNode? = ListNode(-1)
+        var prev = prevHead
         var l1 = l1
         var l2 = l2
         while l1 != nil && l2 != nil {
@@ -86,9 +86,24 @@ class Solution {
         }
         
         prev?.next = l1 == nil ? l2 : l1
-        return dummy?.next
+        return prevHead?.next
     }
 
+    func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
+        
+        var p1 = m - 1;
+        var p2 = n - 1;
+        var p = m + n - 1;
+        
+        while (p1 >= 0) && (p2 >= 0) {
+            let numsIsLess = nums1[p1] < nums2[p2]
+            nums1[p] = numsIsLess ? nums2[p2] : nums1[p1]
+            numsIsLess ? (p2 -= 1) : (p1 -= 1)
+            p-=1
+        }
+        
+        nums1[0...p2+1] = nums2[0...p2+1]
+    }
 }
 
 let solution = Solution()
@@ -111,3 +126,8 @@ l3.next = l4
 
 let l = solution.mergeTwoLists(l1, l3)
 print(l?.next?.next?.next?.val ?? -1)
+
+var nums1:[Int] = [1,2,3,0,0,0]
+let nums2:[Int] = [2,5,6]
+solution.merge(&nums1,3, nums2, 3)
+print(nums1)

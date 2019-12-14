@@ -6,4 +6,5 @@
 #### 2.[旋转数组](./rotate-array.md)
 
 #### 3. [合并两个有序链表](./merge-two-sorted-lists.md)
+#### 4. [合并两个有序数组](./merge-two-sorted-array.md)
 
