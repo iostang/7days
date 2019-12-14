@@ -95,14 +95,13 @@ class Solution {
         var p2 = n - 1;
         var p = m + n - 1;
         
-        while (p1 >= 0) && (p2 >= 0) {
-            let numsIsLess = nums1[p1] < nums2[p2]
-            nums1[p] = numsIsLess ? nums2[p2] : nums1[p1]
-            numsIsLess ? (p2 -= 1) : (p1 -= 1)
-            p-=1
+        while p1 >= 0 && p2 >= 0 {
+            let nums1IsLess = nums1[p1] < nums2[p2]
+            nums1[p] = nums1IsLess ? nums2[p2] : nums1[p1]
+            nums1IsLess ? (p2 -= 1) : (p1 -= 1)
+            p -= 1
         }
-        
-        nums1[0...p2+1] = nums2[0...p2+1]
+        nums1[0..<p2+1] = nums2[0..<p2+1]
     }
 }
 
