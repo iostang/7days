@@ -103,6 +103,30 @@ class Solution {
         }
         nums1[0..<p2+1] = nums2[0..<p2+1]
     }
+    
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        
+//        for i in 0..<nums.count {
+//            for j in i+1..<nums.count {
+//                if nums[j] == target - nums[i] {
+//                    return [i,j]
+//                }
+//            }
+//        }
+
+
+        var map:[Int:Int] = [:]
+        var idx:Int = 0
+        for item in nums {
+            let complement = target - item
+            if map.keys.contains(complement) {
+                return [map[complement]!,idx]
+            }
+            map[item] = idx
+            idx+=1
+        }
+        return []
+    }
 }
 
 let solution = Solution()
@@ -130,3 +154,7 @@ var nums1:[Int] = [1,2,3,0,0,0]
 let nums2:[Int] = [2,5,6]
 solution.merge(&nums1,3, nums2, 3)
 print(nums1)
+
+let sum = [2,7,11,15]
+let towNums = solution.twoSum(sum, 9)
+print(towNums)
