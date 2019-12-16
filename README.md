@@ -9,4 +9,5 @@
 #### 4. [合并两个有序数组](./merge-two-sorted-array.md)
 
 #### 5. [两数之和](./two-sum.md)
+#### 6. [移动零](./move-zeroes.md)
 

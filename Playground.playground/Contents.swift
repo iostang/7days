@@ -119,7 +119,7 @@ class Solution {
         var idx:Int = 0
         for item in nums {
             let complement = target - item
-            if map.keys.contains(complement) {
+            if let _ = map.compactMap({$0.key == complement}).first {
                 return [map[complement]!,idx]
             }
             map[item] = idx
@@ -127,12 +127,43 @@ class Solution {
         }
         return []
     }
+    
+    func moveZeroes(_ nums: inout [Int]) {
+        //暴力
+        // for i in 0..<nums.count {
+        //     for j in i+1..<nums.count {
+        //         if nums[i] == 0 {
+        //             let temp = nums[i]
+        //             nums[i] = nums[j]
+        //             nums[j] = temp
+        //         }
+        //     }
+        // }
+
+        //1 慢指针（lastNonZeroFoundAt）之前的所有元素都是非零的
+        //2 当前指针和慢速指针之间的所有元素都是零
+        //当遇到一个非零元素时 交换当前指针和慢速指针指向的元素 然后前进两个指针。
+        // 如果是零 只前进当前指针
+        var lastNonZeroFoundAt:Int = 0
+        for i in 0..<nums.count {
+            if nums[i] != 0 {
+                let temp = nums[i]
+                nums[i] = nums[lastNonZeroFoundAt]
+                nums[lastNonZeroFoundAt] = temp
+                lastNonZeroFoundAt+=1
+            }
+        }
+        
+//        let count = nums.count
+//        nums = nums.filter { $0 != 0}
+//        for _ in 0 ..< (count - nums.count) { nums.append(0) }
+    }
 }
 
 let solution = Solution()
 
-var nums = [1,1,2,2,3,3,4,5,6,7,7,8,9,9]
-let count = solution.removeDuplicates(&nums)
+var removeDup = [1,1,2,2,3,3,4,5,6,7,7,8,9,9]
+let count = solution.removeDuplicates(&removeDup)
 print(count)
 
 var rotate = [1,2,3,4,5,6,7]
@@ -147,14 +178,18 @@ var l4 = ListNode(4)
 l1.next = l2
 l3.next = l4
 
-let l = solution.mergeTwoLists(l1, l3)
-print(l?.next?.next?.next?.val ?? -1)
+let twoList = solution.mergeTwoLists(l1, l3)
+print(twoList?.next?.next?.next?.val ?? -1)
 
 var nums1:[Int] = [1,2,3,0,0,0]
 let nums2:[Int] = [2,5,6]
 solution.merge(&nums1,3, nums2, 3)
 print(nums1)
 
-let sum = [2,7,11,15]
-let towNums = solution.twoSum(sum, 9)
+let sum = [3,2,4]
+let towNums = solution.twoSum(sum, 6)
 print(towNums)
+
+var move = [0,1,0,3,5]
+solution.moveZeroes(&move)
+print(move)
