@@ -59,16 +59,16 @@ class Solution {
     }
     
     func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-//        guard let l1 = l1 else { return l2 }
-//        guard let l2 = l2 else { return l1 }
-//
-//        if (l1.val < l2.val) {
-//            l1.next = mergeTwoLists(l1.next, l2)
-//            return l1
-//        } else {
-//            l2.next = mergeTwoLists(l1, l2.next)
-//            return l2
-//        }
+        //        guard let l1 = l1 else { return l2 }
+        //        guard let l2 = l2 else { return l1 }
+        //
+        //        if (l1.val < l2.val) {
+        //            l1.next = mergeTwoLists(l1.next, l2)
+        //            return l1
+        //        } else {
+        //            l2.next = mergeTwoLists(l1, l2.next)
+        //            return l2
+        //        }
         
         let prevHead:ListNode? = ListNode(-1)
         var prev = prevHead
@@ -88,7 +88,7 @@ class Solution {
         prev?.next = l1 == nil ? l2 : l1
         return prevHead?.next
     }
-
+    
     func merge(_ nums1: inout [Int], _ m: Int, _ nums2: [Int], _ n: Int) {
         
         var p1 = m - 1;
@@ -106,15 +106,15 @@ class Solution {
     
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         
-//        for i in 0..<nums.count {
-//            for j in i+1..<nums.count {
-//                if nums[j] == target - nums[i] {
-//                    return [i,j]
-//                }
-//            }
-//        }
-
-
+        //        for i in 0..<nums.count {
+        //            for j in i+1..<nums.count {
+        //                if nums[j] == target - nums[i] {
+        //                    return [i,j]
+        //                }
+        //            }
+        //        }
+        
+        
         var map:[Int:Int] = [:]
         var idx:Int = 0
         for item in nums {
@@ -139,7 +139,7 @@ class Solution {
         //         }
         //     }
         // }
-
+        
         //1 慢指针（lastNonZeroFoundAt）之前的所有元素都是非零的
         //2 当前指针和慢速指针之间的所有元素都是零
         //当遇到一个非零元素时 交换当前指针和慢速指针指向的元素 然后前进两个指针。
@@ -154,9 +154,28 @@ class Solution {
             }
         }
         
-//        let count = nums.count
-//        nums = nums.filter { $0 != 0}
-//        for _ in 0 ..< (count - nums.count) { nums.append(0) }
+        //        let count = nums.count
+        //        nums = nums.filter { $0 != 0}
+        //        for _ in 0 ..< (count - nums.count) { nums.append(0) }
+    }
+    
+    func isValid(_ s: String) -> Bool {
+        var stack = ""
+        let buckets: [Character: Character] = ["}": "{", "]": "[", ")": "("]
+        for char in s {
+            guard let expectedPrevBracket = buckets[char] else {
+                stack.append(char);
+                continue
+            }
+            
+            if let last = stack.last, expectedPrevBracket == last {
+                stack.removeLast()
+            } else {
+                return false
+            }
+        }
+        
+        return stack.isEmpty
     }
 }
 
@@ -193,3 +212,8 @@ print(towNums)
 var move = [0,1,0,3,5]
 solution.moveZeroes(&move)
 print(move)
+
+
+let valid = "({}{})"
+let validResult = solution.isValid(valid)
+print(validResult)

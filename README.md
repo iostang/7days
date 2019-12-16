@@ -10,4 +10,5 @@
 
 #### 5. [两数之和](./two-sum.md)
 #### 6. [移动零](./move-zeroes.md)
+#### 7. [有效的括号](./valid-parentheses.md)
 
